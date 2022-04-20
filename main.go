@@ -1,14 +1,15 @@
-package main
+package parse
 
 import (
 	"bufio"
 	"bytes"
 	"flag"
 	"fmt"
-	"golang.org/x/crypto/ssh/terminal"
 	"io"
 	"io/ioutil"
 	"os"
+
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 var (

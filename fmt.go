@@ -1,4 +1,4 @@
-package main
+package parse
 
 import (
 	"errors"
@@ -61,7 +61,7 @@ func parseAssignStmt(assignStmt *ast.AssignStmt) error {
 func replaceFormatedSQL(basicLit *ast.BasicLit, ident *ast.Ident) error {
 	if ident.Name == variableName {
 		sqlRune := []rune(basicLit.Value)
-		trimSQL := string(sqlRune[1: len(sqlRune)-1])
+		trimSQL := string(sqlRune[1 : len(sqlRune)-1])
 		sql, err := NewBuilder(trimSQL).Parse()
 		basicLit.Value = fmt.Sprintf("`\n%s`", sql)
 		return err

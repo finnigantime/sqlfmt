@@ -1,9 +1,9 @@
-package main
+package parse
 
 import (
-	"testing"
 	"reflect"
 	"runtime"
+	"testing"
 )
 
 func TestParseMode(t *testing.T) {

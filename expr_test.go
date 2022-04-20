@@ -1,10 +1,11 @@
-package main
+package parse
 
 import (
-	"testing"
-	"github.com/sgswtky/sqlparser"
 	"fmt"
 	"strings"
+	"testing"
+
+	"github.com/sgswtky/sqlparser"
 )
 
 func TestGetConvertTypeQualifier(t *testing.T) {
