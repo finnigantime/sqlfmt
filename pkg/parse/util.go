@@ -1,9 +1,9 @@
-package main
+package parse
 
 import (
 	"fmt"
-	"strings"
 	"runtime"
+	"strings"
 )
 
 type tuple2String struct {

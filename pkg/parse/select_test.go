@@ -1,7 +1,8 @@
-package main
+package parse
 
 import (
 	"testing"
+
 	"github.com/sgswtky/sqlparser"
 )
 

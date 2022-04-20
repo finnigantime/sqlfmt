@@ -1,10 +1,10 @@
-package main
+package parse
 
 import (
 	"bytes"
 	"fmt"
-	"testing"
 	"go/ast"
+	"testing"
 )
 
 func TestReplaceGoFile(t *testing.T) {
@@ -33,13 +33,13 @@ import "fmt"
 
 func main() {
 	// sqlfmt
-	sql := `+ "`", `
+	sql := `+"`", `
 SELECT
   *
 FROM
   user
   LEFT JOIN userb
-    ON user.user_id = userb.user_id`+ "`", `
+    ON user.user_id = userb.user_id`+"`", `
 	fmt.Println(sql)
 }
 
