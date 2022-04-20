@@ -1,9 +1,8 @@
-package parse
+package main
 
 import (
-	"strings"
-
 	"github.com/sgswtky/sqlparser"
+	"strings"
 )
 
 func (b *BuilderStruct) stmtSelect(stmt *sqlparser.Select) string {

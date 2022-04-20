@@ -1,10 +1,9 @@
-package parse
+package main
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/sgswtky/sqlparser"
+	"strings"
 )
 
 func (b *BuilderStruct) expr(e sqlparser.Expr) string {

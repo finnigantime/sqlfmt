@@ -1,8 +1,8 @@
-package parse
+package main
 
 import (
-	"fmt"
 	"testing"
+	"fmt"
 )
 
 func expectFmt(expect, result interface{}) string {

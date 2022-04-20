@@ -1,15 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"testing"
 	"reflect"
 	"runtime"
-	"testing"
 )
-
-func expectFmt(expect, result interface{}) string {
-	return fmt.Sprintf("expect: `%v` but result: `%v`", expect, result)
-}
 
 func TestParseMode(t *testing.T) {
 	isTerminal = func(fd int) bool { return true }
@@ -75,12 +70,12 @@ func TestExec(t *testing.T) {
 		t.Fatal(expectCommandFunc, resultCommandFunc)
 	}
 
-	// fileFunc := exec(modeFile)
-	// resultFileFunc := getFuncName(fileFunc)
-	// expectFileFunc := getFuncName(fileMode)
-	// if resultFileFunc != expectFileFunc {
-	// 	t.Fatal(expectFileFunc, resultFileFunc)
-	// }
+	fileFunc := exec(modeFile)
+	resultFileFunc := getFuncName(fileFunc)
+	expectFileFunc := getFuncName(fileMode)
+	if resultFileFunc != expectFileFunc {
+		t.Fatal(expectFileFunc, resultFileFunc)
+	}
 
 	pipeFunc := exec(modePipe)
 	resultPipeFunc := getFuncName(pipeFunc)

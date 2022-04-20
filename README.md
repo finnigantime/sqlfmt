@@ -17,23 +17,23 @@ go get -u github.com/sgswtky/sqlfmt
 ### Replace file
 
 The SQL is formatted if both of the following conditions are satisfied.
-
-- Variable name 'sql'
-- If '// sqlfmt' is commented one line before that variable
+  - Variable name 'sql'
+  - If '// sqlfmt' is commented one line before that variable
 
 Please be aware that all comments will be deleted after formatting.
+
 
 For example, if the following file exists,
 
 ```sample.go
-package parse
+package main
 
 import "fmt"
 
 func main() {
 	// sqlfmt
 	sql := `select * from example where example_id = ? and example_name like '%example%'`
-
+	
 	fmt.Println(sql)
 }
 
@@ -48,7 +48,7 @@ func main() {
 The SQL statement in the `sample.go` file is changed as follows.
 
 ```sample.go
-package parse
+package main
 
 import "fmt"
 
@@ -69,12 +69,12 @@ WHERE
 
 ### Action mode
 
-| option | detail                                                              |
-| ------ | ------------------------------------------------------------------- |
-| -f     | File mode. Please specify the file name                             |
-| -w     | Rewrite the target file. It works only when combined with file mode |
-| -i     | Interactive mode.                                                   |
-|        | Pipe mode. See below.                                               |
+| option | detail |
+|---|---|
+| -f | File mode. Please specify the file name |
+| -w | Rewrite the target file. It works only when combined with file mode |
+| -i | Interactive mode. |
+|    | Pipe mode. See below. |
 
 #### Pipe mode
 
@@ -91,9 +91,9 @@ WHERE
 
 ### Detailed Behavior
 
-- Comments are not supported and will be deleted
-- Since it only supports static SQL
-- do not combine strings and variables in the format target variable.
+ - Comments are not supported and will be deleted
+ - Since it only supports static SQL
+ - do not combine strings and variables in the format target variable.
 
 ## Thanks
 

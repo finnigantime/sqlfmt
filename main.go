@@ -2,13 +2,13 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"flag"
 	"fmt"
+	"golang.org/x/crypto/ssh/terminal"
+	"io"
 	"io/ioutil"
 	"os"
-
-	"github.com/finnigantime/sqlfmt/pkg/parse"
-	"golang.org/x/crypto/ssh/terminal"
 )
 
 var (
@@ -26,7 +26,7 @@ var (
 	sqlOpt         = flag.String("sql", "", "command line mode.")
 	interactiveOpt = flag.Bool("i", false, "interactive mode.")
 	fileOpt        = flag.String("f", "", "file mode.")
-	// writeOpt       = flag.Bool("w", false, "overwrite in the case of '-f', '-r'.")
+	writeOpt       = flag.Bool("w", false, "overwrite in the case of '-f', '-r'.")
 
 	isTerminal = terminal.IsTerminal
 )
@@ -79,8 +79,8 @@ func exec(mode int) execFunc {
 		return dialogMode
 	case modeCommand:
 		return commandMode
-	// case modeFile:
-	// 	return fileMode
+	case modeFile:
+		return fileMode
 	case modePipe:
 		return pipeMode
 	default:
@@ -104,40 +104,40 @@ func dialogMode() error {
 	}
 	for {
 		str := f()
-		if err := parse.FmtSQL(str, os.Stdout, modeDialog); err != nil {
+		if err := fmtSQL(str, os.Stdout, modeDialog); err != nil {
 			return err
 		}
 	}
 }
 
 func commandMode() error {
-	return parse.FmtSQL(*sqlOpt, os.Stdout, modeCommand)
+	return fmtSQL(*sqlOpt, os.Stdout, modeCommand)
 }
 
-// func fileMode() error {
-// 	f, err := os.Open(*fileOpt)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	defer f.Close()
-// 	buff := new(bytes.Buffer)
-// 	if err := file(f, buff); err != nil {
-// 		return err
-// 	}
-// 	if *writeOpt {
-// 		if err := ioutil.WriteFile(*fileOpt, buff.Bytes(), os.ModePerm); err != nil {
-// 			return err
-// 		}
-// 	} else {
-// 		if _, err := os.Stdout.WriteString(buff.String()); err != nil {
-// 			return err
-// 		}
-// 	}
-// 	return nil
-// }
+func fileMode() error {
+	f, err := os.Open(*fileOpt)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	buff := new(bytes.Buffer)
+	if err := file(f, buff); err != nil {
+		return err
+	}
+	if *writeOpt {
+		if err := ioutil.WriteFile(*fileOpt, buff.Bytes(), os.ModePerm); err != nil {
+			return err
+		}
+	} else {
+		if _, err := os.Stdout.WriteString(buff.String()); err != nil {
+			return err
+		}
+	}
+	return nil
+}
 
 func pipeMode() error {
-	return parse.FmtSQL(string(pipeStdIn), os.Stdout, modePipe)
+	return fmtSQL(string(pipeStdIn), os.Stdout, modePipe)
 }
 
 func usageMode() error {
@@ -145,6 +145,6 @@ func usageMode() error {
 	return nil
 }
 
-// func file(f *os.File, w io.Writer) error {
-// 	return parse.FmtSQL(f.Name(), f, w)
-// }
+func file(f *os.File, w io.Writer) error {
+	return fmtFile(f.Name(), f, w)
+}

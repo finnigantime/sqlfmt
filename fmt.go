@@ -1,4 +1,4 @@
-package parse
+package main
 
 import (
 	"errors"
@@ -12,15 +12,7 @@ import (
 	"strings"
 )
 
-const (
-	modeUnknown = 0
-	modeDialog  = iota + 1
-	modeCommand
-	modeFile
-	modePipe
-)
-
-func FmtSQL(sql string, w io.Writer, mode int) error {
+func fmtSQL(sql string, w io.Writer, mode int) error {
 	builder := NewBuilder(sql)
 	result, err := builder.Parse()
 	if err != nil {
@@ -69,7 +61,7 @@ func parseAssignStmt(assignStmt *ast.AssignStmt) error {
 func replaceFormatedSQL(basicLit *ast.BasicLit, ident *ast.Ident) error {
 	if ident.Name == variableName {
 		sqlRune := []rune(basicLit.Value)
-		trimSQL := string(sqlRune[1 : len(sqlRune)-1])
+		trimSQL := string(sqlRune[1: len(sqlRune)-1])
 		sql, err := NewBuilder(trimSQL).Parse()
 		basicLit.Value = fmt.Sprintf("`\n%s`", sql)
 		return err
