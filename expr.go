@@ -208,7 +208,7 @@ func (b *BuilderStruct) getFuncExpr(funcExpr *sqlparser.FuncExpr) string {
 func valTypeFormat(valType sqlparser.ValType, body []byte) string {
 	switch valType {
 	case sqlparser.StrVal:
-		return fmt.Sprintf("\"%s\"", string(body))
+		return fmt.Sprintf("'%s'", string(body))
 	case sqlparser.IntVal:
 		fallthrough
 	case sqlparser.FloatVal:

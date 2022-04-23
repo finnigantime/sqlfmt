@@ -2,10 +2,10 @@ select case account_type when 'free' then '' when 'silver' then rank.silver when
 --------------------------------------------------
 SELECT
   CASE account_type
-    WHEN "free" THEN ""
-    WHEN "silver" THEN rank.silver
-    WHEN "platinum" THEN rank.platinum
-    WHEN "vip" THEN rank.vip
+    WHEN 'free' THEN ''
+    WHEN 'silver' THEN rank.silver
+    WHEN 'platinum' THEN rank.platinum
+    WHEN 'vip' THEN rank.vip
     ELSE rank.normal
     END AS account_rank
 FROM
