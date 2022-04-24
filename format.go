@@ -151,7 +151,7 @@ func formatOrderBy(tuples []*tuple2String) string {
 	result := make([]string, 0)
 	for _, v := range tuples {
 		if strings.ToUpper(v.str1) == asc {
-			result = append(result, v.str2)
+			result = append(result, fmt.Sprintf("%s %s", v.str2, asc))
 		} else {
 			result = append(result, fmt.Sprintf("%s %s", v.str2, desc))
 		}

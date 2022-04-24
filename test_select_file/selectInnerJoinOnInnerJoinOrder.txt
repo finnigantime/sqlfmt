@@ -16,4 +16,4 @@ FROM
       is_deleted = false
   ) AS g
     ON child.group_id = g.group_id
-ORDER BY group_name
+ORDER BY group_name ASC

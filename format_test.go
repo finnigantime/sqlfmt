@@ -248,7 +248,7 @@ func TestFormatLimit(t *testing.T) {
 }
 
 func TestFormatOrderBy(t *testing.T) {
-	const expect = "ORDER BY col1, col2, col3 DESC"
+	const expect = "ORDER BY col1 ASC, col2 ASC, col3 DESC"
 	orderBys := []*tuple2String{
 		{
 			asc,

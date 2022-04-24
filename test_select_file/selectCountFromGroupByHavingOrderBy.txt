@@ -8,4 +8,4 @@ FROM
 GROUP BY account_name
 HAVING
   c > 1
-ORDER BY c DESC, account_name
+ORDER BY c DESC, account_name ASC

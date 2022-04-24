@@ -145,7 +145,7 @@ func TestOrderBy(t *testing.T) {
 		},
 	}
 	result := NewBuilder("").orderBy(orderBy)
-	expect := "ORDER BY login_count, user_id"
+	expect := "ORDER BY login_count ASC, user_id ASC"
 	if result != expect {
 		t.Fatal(expectFmt(expect, result))
 	}
